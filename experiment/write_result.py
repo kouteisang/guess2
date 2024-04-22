@@ -91,7 +91,7 @@ def get_res(name, k, m, type):
             file_path.append({os.path.join(file_base,"{}_desc.nt".format(i)):i})
 
     print("**",model_path)
-    model = torch.load(model_path, map_location=torch.device('cpu'))
+    model = torch.load(model_path)
     tf = TriplesFactory.from_path(all_file)
     for file in file_path:
         key = list(file)[0] # file path

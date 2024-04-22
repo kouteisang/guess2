@@ -16,8 +16,8 @@ def get_embedding_representation(tf, model, file_path):
         emb_rep(list): return embedding representation
     '''
     emb_rep = []
-    entity_embedding = model.entity_representations[0](indices=None).detach().numpy()
-    relation_embedding = model.relation_representations[0](indices=None).detach().numpy()
+    entity_embedding = model.entity_representations[0](indices=None).detach().to("cpu").numpy()
+    relation_embedding = model.relation_representations[0](indices=None).detach().to("cpu").numpy()
     with open(file_path, 'r') as f:
         for line in f:
             h, r, t = line.split("\t")

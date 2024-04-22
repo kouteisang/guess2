@@ -1,0 +1,5 @@
+<http://data.linkedmdb.org/resource/film/8446> <http://data.linkedmdb.org/resource/movie/director> <http://data.linkedmdb.org/resource/director/11436> .
+<http://data.linkedmdb.org/resource/film/8446> <http://data.linkedmdb.org/resource/movie/writer> <http://data.linkedmdb.org/resource/writer/3287> .
+<http://data.linkedmdb.org/resource/film/8446> <http://data.linkedmdb.org/resource/movie/writer> <http://data.linkedmdb.org/resource/writer/2112> .
+<http://data.linkedmdb.org/resource/film/8446> <http://data.linkedmdb.org/resource/movie/writer> <http://data.linkedmdb.org/resource/writer/2113> .
+<http://data.linkedmdb.org/resource/film/8446> <http://www.w3.org/2000/01/rdf-schema#label> "Mighty Joe Young" .

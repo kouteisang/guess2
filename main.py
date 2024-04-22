@@ -16,7 +16,7 @@ if __name__ == '__main__':
 
     for k in ks:
         for m in ms:
-            # get_res("dbpedia", k, m, type)
+            get_res("dbpedia", k, m, type)
             get_res("lmdb", k, m, type)
 
 
