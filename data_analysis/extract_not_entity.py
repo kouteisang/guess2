@@ -1,6 +1,3 @@
-# @Author : Cheng Huang
-# @Time   : 19:27 2022/10/25
-# @File   : extract_not_entity.py
 import os
 import pandas as pd
 from rdflib import Graph

@@ -1,6 +1,3 @@
-# @Author : Cheng Huang
-# @Time   : 18:56 2022/10/19
-# @File   : check_multiple.py
 import os
 from rdflib import Graph
 

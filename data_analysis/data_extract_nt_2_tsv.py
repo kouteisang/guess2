@@ -1,8 +1,3 @@
-# @Author : Cheng Huang
-# @Time   : 14:36 2022/9/5
-# @File   : data_extract.py
-
-
 import os
 import re
 from os import path

@@ -1,6 +1,3 @@
-# @Author : Cheng Huang
-# @Time   : 11:04 2022/10/10
-# @File   : relation_percentage.py
 import os
 import numpy as np
 import matplotlib.pyplot as plt

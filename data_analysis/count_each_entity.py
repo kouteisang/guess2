@@ -1,6 +1,3 @@
-# @Author : Cheng Huang
-# @Time   : 18:54 2022/10/27
-# @File   : count_each_entity.py
 import os
 
 
