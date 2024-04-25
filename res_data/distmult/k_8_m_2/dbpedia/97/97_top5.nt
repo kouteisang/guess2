@@ -1,0 +1,5 @@
+<http://dbpedia.org/resource/In_the_End_(Black_Veil_Brides_song)> <http://dbpedia.org/ontology/previousWork> <http://dbpedia.org/resource/Rebel_Love_Song> .
+<http://dbpedia.org/resource/Unholy_(song)> <http://dbpedia.org/ontology/previousWork> <http://dbpedia.org/resource/Rebel_Love_Song> .
+<http://dbpedia.org/resource/Rebel_Love_Song> <http://www.w3.org/2000/01/rdf-schema#label> "Rebel Love Song"@en .
+<http://dbpedia.org/resource/Rebel_Love_Song> <http://dbpedia.org/ontology/writer> <http://dbpedia.org/resource/Black_Veil_Brides> .
+<http://dbpedia.org/resource/Rebel_Love_Song> <http://dbpedia.org/ontology/musicalBand> <http://dbpedia.org/resource/Black_Veil_Brides> .
