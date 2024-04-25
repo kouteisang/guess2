@@ -12,7 +12,7 @@ from KMeansBased.Kmeans import kmeans_clustering_entity_summarization
 
 def kmeans_store(top_k, type, id, name):
     root = os.path.abspath(os.path.dirname(os.getcwd()))+"/guess2/"
-    folder_path = os.path.join(root, "res_data", "KMeansClustering", name)
+    folder_path = os.path.join(root, "res_data", "KMeansClustering-t", name)
     folder = os.path.exists(folder_path)
     if not folder:
         os.makedirs(folder_path)
