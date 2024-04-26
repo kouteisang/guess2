@@ -233,11 +233,14 @@ def choose(path):
     margins = [1, 2, 10]
 
 
-    for lr in lrs:
-        for dim in dims:
-            for margin in margins:
-                result = evluate_model(path, training, testing, validation, lr, dim, margin) 
-                print("ls = {}, dim = {}, margin = {}".format(lr, dim, margin), result) 
+    # for lr in lrs:
+    #     for dim in dims:
+    #         for margin in margins:
+    lr = 0.001
+    dim = 100
+    margin = 1
+    result = evluate_model(path, training, testing, validation, lr, dim, margin) 
+    print("ls = {}, dim = {}, margin = {}".format(lr, dim, margin), result) 
                   # for lr in lrs:
     #     for dim in dims:
     #         for fn in fns:
