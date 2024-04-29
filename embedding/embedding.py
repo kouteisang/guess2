@@ -14,12 +14,19 @@ from pykeen.pipeline import pipeline
 from pykeen.optimizers import Adam
 from pykeen.evaluation import RankBasedEvaluator
 import torch
+from pykeen.utils import set_random_seed
+# from pykeen.pipeline import set_random_seed
 
 import os
 os.environ["CUDA_VISIBLE_DEVICES"] = "1"  # 只使用 GPU 0
+specific_seed=42
+# random.seed(specific_seed)
+# np.random.seed(specific_seed)
+# torch.manual_seed(specific_seed)
+# torch.cuda.manual_seed_all(specific_seed)
+# set_random_seed(specific_seed)
 
-
-def get_embedding_CompGCN(path, training, testing, validation, lr, dim, fn, margin):
+def get_embedding_CompGCN(path, training, testing, validation):
 
     # grid search to find the best hyper-parameter
     dbmodel = None
@@ -33,7 +40,7 @@ def get_embedding_CompGCN(path, training, testing, validation, lr, dim, fn, marg
                 embedding_dim=100,
             ),
             training_kwargs=dict(
-                num_epochs=1000,
+                num_epochs=10,
                 batch_size=128,
             ),
             stopper='early',  # 使用提前停止
@@ -43,7 +50,7 @@ def get_embedding_CompGCN(path, training, testing, validation, lr, dim, fn, marg
                 relative_delta=0.01  # 改善至少需要1%
             )
         )
-        dbmodel.save_to_directory('model_complete_dbpedia_CompGCN_default_100/dbpedia_CompGCN_model')
+        # dbmodel.save_to_directory('model_complete_dbpedia_CompGCN_default_100/dbpedia_CompGCN_model')
 
     lmmodel = None
     if "lmdb" in path:
@@ -53,11 +60,12 @@ def get_embedding_CompGCN(path, training, testing, validation, lr, dim, fn, marg
             testing=testing,
             validation=validation,
             model_kwargs=dict(
-                embedding_dim=50,
+                interaction="distmult",
+                embedding_dim=100,
             ),
             training_kwargs=dict(
-                num_epochs=300,  # 设置较大的epoch，期望通过提前停止来中断
-                batch_size=32,
+                num_epochs=10,  # 设置较大的epoch，期望通过提前停止来中断
+                batch_size=128,
             ),
             stopper='early',  # 使用提前停止
             stopper_kwargs=dict(
@@ -67,7 +75,7 @@ def get_embedding_CompGCN(path, training, testing, validation, lr, dim, fn, marg
             )
         )
 
-        lmmodel.save_to_directory('model_compgcn_default_complete_lmdb_50/lmdb_CompGCN_model')
+        # lmmodel.save_to_directory('model_compgcn_default_complete_lmdb_50/lmdb_CompGCN_model')
 
 
 def get_embedding_TransE(path, training, testing, validation, lr, dim, fn, margin):
@@ -88,7 +96,7 @@ def get_embedding_TransE(path, training, testing, validation, lr, dim, fn, margi
                 scoring_fct_norm = fn,
                 embedding_dim=dim),
             training_kwargs=dict(
-                num_epochs=400,  # 设置较大的epoch，期望通过提前停止来中断
+                num_epochs=300,  # 设置较大的epoch，期望通过提前停止来中断
                 batch_size=128,
             ),
             optimizer=Adam,
@@ -100,7 +108,7 @@ def get_embedding_TransE(path, training, testing, validation, lr, dim, fn, margi
                 relative_delta=0.01  # 改善至少需要1%
             )
         )
-        dbmodel.save_to_directory('/home/cheng/guess2/embedding/transe_embedding/dbpedia_transe_model_dim_{}_lr_{}_fn_{}_margin_{}'.format(dim, lr, fn, margin))
+        # dbmodel.save_to_directory('/home/cheng/guess2/embedding/transe_embedding/dbpedia_transe_model_dim_{}_lr_{}_fn_{}_margin_{}'.format(dim, lr, fn, margin))
 
     lmmodel = None
     if "lmdb" in path:
@@ -117,7 +125,7 @@ def get_embedding_TransE(path, training, testing, validation, lr, dim, fn, margi
                 scoring_fct_norm = fn,
                 embedding_dim=dim),
             training_kwargs=dict(
-                num_epochs=400,  # 设置较大的epoch，期望通过提前停止来中断
+                num_epochs=10,  # 设置较大的epoch，期望通过提前停止来中断
                 batch_size=128,
             ),
             optimizer=Adam,
@@ -130,7 +138,7 @@ def get_embedding_TransE(path, training, testing, validation, lr, dim, fn, margi
             )
         )
 
-        lmmodel.save_to_directory('/home/cheng/guess2/embedding/transe_embedding/lmdb_transe_model_dim_{}_lr_{}_fn_{}_margin_{}'.format(dim, lr, fn, margin))
+        # lmmodel.save_to_directory('/home/cheng/guess2/embedding/transe_embedding/lmdb_transe_model_dim_{}_lr_{}_fn_{}_margin_{}'.format(dim, lr, fn, margin))
 
 
 
@@ -150,7 +158,7 @@ def get_embedding_distmult(path, training, testing, validation, lr, dim, margin)
             model_kwargs = dict( 
                 embedding_dim=dim),
             training_kwargs=dict(
-                num_epochs=300,  # 设置较大的epoch，期望通过提前停止来中断
+                num_epochs=10,  # 设置较大的epoch，期望通过提前停止来中断
                 batch_size=128,
             ),
             optimizer=Adam,
@@ -162,7 +170,7 @@ def get_embedding_distmult(path, training, testing, validation, lr, dim, margin)
                 relative_delta=0.01  # 改善至少需要1%
             )
         )
-        dbmodel.save_to_directory('/home/cheng/guess2/embedding/distmult_embedding/dbpedia_distmult_model_dim_{}_lr_{}_margin_{}'.format(dim, lr, margin))
+        # dbmodel.save_to_directory('/home/cheng/guess2/embedding/distmult_embedding/dbpedia_distmult_model_dim_{}_lr_{}_margin_{}'.format(dim, lr, margin))
 
     lmmodel = None
     if "lmdb" in path:
@@ -176,7 +184,7 @@ def get_embedding_distmult(path, training, testing, validation, lr, dim, margin)
             model_kwargs = dict(
                 embedding_dim=dim),
             training_kwargs=dict(
-                num_epochs=300,  # 设置较大的epoch，期望通过提前停止来中断
+                num_epochs=10,  # 设置较大的epoch，期望通过提前停止来中断
                 batch_size=128,
             ),
             optimizer=Adam,
@@ -189,19 +197,23 @@ def get_embedding_distmult(path, training, testing, validation, lr, dim, margin)
             )
         )
 
-        lmmodel.save_to_directory('/home/cheng/guess2/embedding/distmult_embedding/lmdb_distmult_model_dim_{}_lr_{}_margin_{}'.format(dim, lr, margin))
+        # lmmodel.save_to_directory('/home/cheng/guess2/embedding/distmult_embedding/lmdb_distmult_model_dim_{}_lr_{}_margin_{}'.format(dim, lr, margin))
 
 # This method is to evaluate the model
 # using MRR and hits@10
-def evluate_model(path, training, testing, validation, lr, dim, margin):
+def evluate_model(path, training, testing, validation, lr, dim, fn, margin):
     evaluator = RankBasedEvaluator()
     model = None
 
     if "dbpedia" in path:
-        model = torch.load("/home/cheng/guess2/embedding/distmult_embedding/dbpedia_distmult_model_dim_{}_lr_{}_margin_{}/trained_model.pkl".format(dim, lr, margin));
+        # TransE
+        model = torch.load("/home/cheng/guess2/embedding/transe_embedding/dbpedia_transe_model_dim_{}_lr_{}_fn_{}_margin_{}/trained_model.pkl".format(dim, lr, fn, margin)); 
+        # model = torch.load("/home/cheng/guess2/embedding/distmult_embedding/dbpedia_distmult_model_dim_{}_lr_{}_margin_{}/trained_model.pkl".format(dim, lr, margin));
         # model = torch.load(os.path.join(os.getcwd(),"model_complete_dbpedia_CompGCN_default_100/dbpedia_CompGCN_model/trained_model.pkl"))
     else:
-        model = torch.load("/home/cheng/guess2/embedding/distmult_embedding/lmdb_distmult_model_dim_{}_lr_{}_margin_{}/trained_model.pkl".format(dim, lr, margin));
+        # TransE
+        model = torch.load("/home/cheng/guess2/embedding/transe_embedding/lmdb_transe_model_dim_{}_lr_{}_fn_{}_margin_{}/trained_model.pkl".format(dim, lr, fn, margin)); 
+        # model = torch.load("/home/cheng/guess2/embedding/distmult_embedding/lmdb_distmult_model_dim_{}_lr_{}_margin_{}/trained_model.pkl".format(dim, lr, margin));
         # model = torch.load(os.path.join(os.getcwd(),"model_compgcn_default_complete_lmdb_50/lmdb_CompGCN_model/trained_model.pkl"))
     result = evaluator.evaluate(
         model=model,
@@ -219,7 +231,7 @@ def evluate_model(path, training, testing, validation, lr, dim, margin):
 
 def choose(path):
     # tf = TriplesFactory.from_path(path, create_inverse_triples=True)
-    tf = TriplesFactory.from_path(path)
+    tf = TriplesFactory.from_path(path,create_inverse_triples=True)
     # split the data into training set, testing set, validation set
     training, testing, validation = tf.split([.8, .1, .1])
     # if "dbpedia" in path:
@@ -236,21 +248,23 @@ def choose(path):
     # for lr in lrs:
     #     for dim in dims:
     #         for margin in margins:
-    lr = 0.001
-    dim = 100
-    margin = 1
-    result = evluate_model(path, training, testing, validation, lr, dim, margin) 
-    print("ls = {}, dim = {}, margin = {}".format(lr, dim, margin), result) 
+    # lr = 0.001
+    # dim = 100
+    # margin = 1
+    # result = evluate_model(path, training, testing, validation, lr, dim, margin) 
+    # print("ls = {}, dim = {}, margin = {}".format(lr, dim, margin), result) 
                   # for lr in lrs:
-    #     for dim in dims:
-    #         for fn in fns:
-    #             for margin in margins:
-    #                 result = evluate_model(path, training, testing, validation, lr, dim, fn, margin)
-    #                 print("ls = {}, dim = {}, fn = {}, margin = {}". format(lr, dim, fn, margin), result)
+    for lr in lrs:
+        for dim in dims:
+            for fn in fns:
+                for margin in margins:
+                    result = evluate_model(path, training, testing, validation, lr, dim, fn, margin)
+                    print("ls = {}, dim = {}, fn = {}, margin = {}". format(lr, dim, fn, margin), result)
+
 
 if __name__ == '__main__':
     root = os.path.abspath(os.path.dirname(os.getcwd()))
-    db_path = "/home/cheng/entity_summarization/complete_data/dbpedia/complete_extract_dbpedia.tsv"
+    # db_path = "/home/cheng/entity_summarization/complete_data/dbpedia/complete_extract_dbpedia.tsv"
     lm_path = "/home/cheng/entity_summarization/complete_data/lmdb/complete_extract_lmdb.tsv"
     # choose(db_path)
     choose(lm_path)

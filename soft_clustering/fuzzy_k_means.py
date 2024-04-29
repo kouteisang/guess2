@@ -5,6 +5,7 @@ import copy
 import random
 import numpy as np
 
+random.seed(42)
 def normalise_U(U):
     """
     After the fuzzy K-means, set the one with highest probability to 1, others to 0

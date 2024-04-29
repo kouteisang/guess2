@@ -13,17 +13,17 @@ if __name__ == '__main__':
 
     ks = [3, 4, 5, 6, 7, 8, 9]
     ms = [2, 5, 9]
-    type = "distmult"
+    type = "transe"
 
     ## Test Guess
-    # for k in ks:
-    #     for m in ms:
-    #         get_res("dbpedia", k, m, type)
-    #         get_res("lmdb", k, m, type)
+    for k in ks:
+        for m in ms:
+            get_res("dbpedia", k, m, type)
+            get_res("lmdb", k, m, type)
 
     ## Test KMeans
-    get_res_k_means("dbpedia", "distmult")
-    get_res_k_means("lmdb", "distmult")
+    # get_res_k_means("dbpedia", "distmult")
+    # get_res_k_means("lmdb", "distmult")
 
 
 # java -jar esummeval_v1.2.jar /Users/huangcheng/Documents/ESBasedonSimilarity/ESBM_benchmark_v1.2 /Users/huangcheng/Documents/ESBasedonSimilarity/res_data/esbm/k_3_m_2
