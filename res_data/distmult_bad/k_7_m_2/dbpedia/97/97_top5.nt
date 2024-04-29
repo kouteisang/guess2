@@ -1,0 +1,5 @@
+<http://dbpedia.org/resource/Rebel_Love_Song> <http://www.w3.org/2000/01/rdf-schema#label> "Rebel Love Song"@en .
+<http://dbpedia.org/resource/Rebel_Love_Song> <http://dbpedia.org/ontology/musicalArtist> <http://dbpedia.org/resource/Black_Veil_Brides> .
+<http://dbpedia.org/resource/Rebel_Love_Song> <http://dbpedia.org/ontology/writer> <http://dbpedia.org/resource/Black_Veil_Brides> .
+<http://dbpedia.org/resource/Rebel_Love_Song> <http://dbpedia.org/ontology/format> <http://dbpedia.org/resource/Music_download> .
+<http://dbpedia.org/resource/Rebel_Love_Song> <http://dbpedia.org/ontology/musicalBand> <http://dbpedia.org/resource/Black_Veil_Brides> .

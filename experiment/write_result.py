@@ -11,7 +11,7 @@ from soft_clustering.fuzzy_k_means import FCM
 def store(top_k, type, id, k, m, name):
     root = os.path.abspath(os.path.dirname(os.getcwd()))+"/guess2/"
     folder_name = "k_" + str(k) + "_m_" + str(m)
-    folder_path = os.path.join(root, "res_data", "transe_bad", folder_name, name)
+    folder_path = os.path.join(root, "res_data", "distmult_bad", folder_name, name)
     folder = os.path.exists(folder_path)
     if not folder:
         os.makedirs(folder_path)
@@ -63,7 +63,7 @@ def get_res(name, k, m, type):
         if type == 'transe':
             model_path = "/home/cheng/guess2/embedding/transe_embedding/dbpedia_transe_model_dim_100_lr_0.01_fn_1_margin_1/trained_model.pkl"
         elif type == 'distmult':
-            model_path = "/home/cheng/guess2/embedding/distmult_embedding/dbpedia_distmult_model_dim_100_lr_0.001_margin_1/trained_model.pkl"
+            model_path = "/home/cheng/guess2/embedding/distmult_embedding/dbpedia_distmult_model_dim_100_lr_0.01_margin_10/trained_model.pkl"
         elif type == "compgcn":
             model_path = os.path.join(root,"embedding","dbpedia","dbpedia_CompGCN_model","trained_model.pkl")
         file_base = os.path.join(root,"data_analysis", "dbpedia")
@@ -80,7 +80,7 @@ def get_res(name, k, m, type):
         if type == 'transe':
             model_path = "/home/cheng/guess2/embedding/transe_embedding/lmdb_transe_model_dim_100_lr_0.01_fn_1_margin_1/trained_model.pkl"
         elif type == 'distmult':
-            model_path = "/home/cheng/guess2/embedding/distmult_embedding/lmdb_distmult_model_dim_100_lr_0.001_margin_1/trained_model.pkl"
+            model_path = "/home/cheng/guess2/embedding/distmult_embedding/lmdb_distmult_model_dim_100_lr_0.01_margin_10/trained_model.pkl"
         elif type == "compgcn":
             model_path = os.path.join(root, "embedding", "lmdb", "lmdb_CompGCN_model", "trained_model.pkl")
         file_base = os.path.join(root,"data_analysis", "lmdb")

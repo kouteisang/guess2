@@ -207,13 +207,15 @@ def evluate_model(path, training, testing, validation, lr, dim, fn, margin):
 
     if "dbpedia" in path:
         # TransE
-        model = torch.load("/home/cheng/guess2/embedding/transe_embedding/dbpedia_transe_model_dim_{}_lr_{}_fn_{}_margin_{}/trained_model.pkl".format(dim, lr, fn, margin)); 
-        # model = torch.load("/home/cheng/guess2/embedding/distmult_embedding/dbpedia_distmult_model_dim_{}_lr_{}_margin_{}/trained_model.pkl".format(dim, lr, margin));
+        # model = torch.load("/home/cheng/guess2/embedding/transe_embedding/dbpedia_transe_model_dim_{}_lr_{}_fn_{}_margin_{}/trained_model.pkl".format(dim, lr, fn, margin)); 
+        # DistMult
+        model = torch.load("/home/cheng/guess2/embedding/distmult_embedding/dbpedia_distmult_model_dim_{}_lr_{}_margin_{}/trained_model.pkl".format(dim, lr, margin));
         # model = torch.load(os.path.join(os.getcwd(),"model_complete_dbpedia_CompGCN_default_100/dbpedia_CompGCN_model/trained_model.pkl"))
     else:
         # TransE
-        model = torch.load("/home/cheng/guess2/embedding/transe_embedding/lmdb_transe_model_dim_{}_lr_{}_fn_{}_margin_{}/trained_model.pkl".format(dim, lr, fn, margin)); 
-        # model = torch.load("/home/cheng/guess2/embedding/distmult_embedding/lmdb_distmult_model_dim_{}_lr_{}_margin_{}/trained_model.pkl".format(dim, lr, margin));
+        # model = torch.load("/home/cheng/guess2/embedding/transe_embedding/lmdb_transe_model_dim_{}_lr_{}_fn_{}_margin_{}/trained_model.pkl".format(dim, lr, fn, margin)); 
+        # DistMult
+        model = torch.load("/home/cheng/guess2/embedding/distmult_embedding/lmdb_distmult_model_dim_{}_lr_{}_margin_{}/trained_model.pkl".format(dim, lr, margin));
         # model = torch.load(os.path.join(os.getcwd(),"model_compgcn_default_complete_lmdb_50/lmdb_CompGCN_model/trained_model.pkl"))
     result = evaluator.evaluate(
         model=model,
@@ -254,17 +256,27 @@ def choose(path):
     # result = evluate_model(path, training, testing, validation, lr, dim, margin) 
     # print("ls = {}, dim = {}, margin = {}".format(lr, dim, margin), result) 
                   # for lr in lrs:
+
+    ## Evaluate TransE model
+    # for lr in lrs:
+    #     for dim in dims:
+    #         for fn in fns:
+    #             for margin in margins:
+    #                 result = evluate_model(path, training, testing, validation, lr, dim, fn, margin)
+    #                 print("ls = {}, dim = {}, fn = {}, margin = {}". format(lr, dim, fn, margin), result)
+
+    ## Evaluate DistMult model
+    lr = 0.01    
     for lr in lrs:
         for dim in dims:
-            for fn in fns:
-                for margin in margins:
-                    result = evluate_model(path, training, testing, validation, lr, dim, fn, margin)
-                    print("ls = {}, dim = {}, fn = {}, margin = {}". format(lr, dim, fn, margin), result)
+            for margin in margins:
+                result = evluate_model(path, training, testing, validation, lr, dim, 1, margin)
+                print("ls = {}, dim = {}, fn = {}, margin = {}".format(lr, dim, 1, margin), result)
 
 
 if __name__ == '__main__':
     root = os.path.abspath(os.path.dirname(os.getcwd()))
-    # db_path = "/home/cheng/entity_summarization/complete_data/dbpedia/complete_extract_dbpedia.tsv"
+    db_path = "/home/cheng/entity_summarization/complete_data/dbpedia/complete_extract_dbpedia.tsv"
     lm_path = "/home/cheng/entity_summarization/complete_data/lmdb/complete_extract_lmdb.tsv"
     # choose(db_path)
     choose(lm_path)

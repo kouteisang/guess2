@@ -13,7 +13,7 @@ if __name__ == '__main__':
 
     ks = [3, 4, 5, 6, 7, 8, 9]
     ms = [2, 5, 9]
-    type = "transe"
+    type = "distmult"
 
     ## Test Guess
     for k in ks:
