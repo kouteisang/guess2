@@ -1,6 +1,3 @@
-# @Author : Cheng Huang
-# @Time   : 13:56 2024/1/12
-# @File   : k-means.py
 
 from sklearn.cluster import KMeans
 from scipy.spatial import distance
