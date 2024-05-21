@@ -61,9 +61,9 @@ def get_res(name, k, m, type):
         all_file = os.path.join(root, "data_analysis", "dbpedia", "dbpedia_all.txt")
 
         if type == 'transe':
-            model_path = "/home/cheng/guess2/embedding/transe_embedding/dbpedia_transe_model_dim_100_lr_0.01_fn_1_margin_1/trained_model.pkl"
+            model_path = "/guess2/embedding/transe_embedding/dbpedia_transe_model_dim_100_lr_0.01_fn_1_margin_1/trained_model.pkl"
         elif type == 'distmult':
-            model_path = "/home/cheng/guess2/embedding/distmult_embedding/dbpedia_distmult_model_dim_100_lr_0.01_margin_10/trained_model.pkl"
+            model_path = "/guess2/embedding/distmult_embedding/dbpedia_distmult_model_dim_100_lr_0.01_margin_10/trained_model.pkl"
         elif type == "compgcn":
             model_path = os.path.join(root,"embedding","dbpedia","dbpedia_CompGCN_model","trained_model.pkl")
         file_base = os.path.join(root,"data_analysis", "dbpedia")
@@ -78,9 +78,9 @@ def get_res(name, k, m, type):
         all_file = os.path.join(root, "data_analysis", "lmdb", "lmdb_all.txt")
 
         if type == 'transe':
-            model_path = "/home/cheng/guess2/embedding/transe_embedding/lmdb_transe_model_dim_100_lr_0.01_fn_1_margin_1/trained_model.pkl"
+            model_path = "/guess2/embedding/transe_embedding/lmdb_transe_model_dim_100_lr_0.01_fn_1_margin_1/trained_model.pkl"
         elif type == 'distmult':
-            model_path = "/home/cheng/guess2/embedding/distmult_embedding/lmdb_distmult_model_dim_100_lr_0.01_margin_10/trained_model.pkl"
+            model_path = "/guess2/embedding/distmult_embedding/lmdb_distmult_model_dim_100_lr_0.01_margin_10/trained_model.pkl"
         elif type == "compgcn":
             model_path = os.path.join(root, "embedding", "lmdb", "lmdb_CompGCN_model", "trained_model.pkl")
         file_base = os.path.join(root,"data_analysis", "lmdb")
