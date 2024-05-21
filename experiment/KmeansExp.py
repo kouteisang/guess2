@@ -1,6 +1,3 @@
-# @Author : Cheng Huang
-# @Time   : 13:56 2024/1/12
-# @File   : k-means.py
 
 import os
 import torch
