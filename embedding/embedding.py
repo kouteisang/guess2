@@ -13,7 +13,7 @@ from pykeen.utils import set_random_seed
 # from pykeen.pipeline import set_random_seed
 
 import os
-os.environ["CUDA_VISIBLE_DEVICES"] = "1"  # 只使用 GPU 0
+os.environ["CUDA_VISIBLE_DEVICES"] = "1"  
 specific_seed=42
 # random.seed(specific_seed)
 # np.random.seed(specific_seed)
@@ -151,7 +151,7 @@ def get_embedding_distmult(path, training, testing, validation, lr, dim, margin)
             model_kwargs = dict( 
                 embedding_dim=dim),
             training_kwargs=dict(
-                num_epochs=10,  # 设置较大的epoch，期望通过提前停止来中断
+                num_epochs=10,
                 batch_size=128,
             ),
             optimizer=Adam,
