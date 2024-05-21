@@ -33,16 +33,3 @@ def get_embedding_representation(tf, model, file_path):
 
     return emb_rep
 
-
-if __name__ == '__main__':
-    # for test
-    root = os.path.abspath(os.path.dirname(os.getcwd()))
-    lm_path = os.path.join(root, "data_analysis", "lmdb", "lmdb_all.txt")
-    tf = TriplesFactory.from_path(lm_path)
-
-    model = torch.load("/Users/huangcheng/Documents/ESBasedonSimilarity/embedding/model_lmdb/lmdb_transe_model/trained_model.pkl")
-
-    file_path = "/Users/huangcheng/Documents/ESBasedonSimilarity/data_analysis/lmdb/101_desc.nt"
-
-    res = get_embedding_representation(tf, model, file_path)
-
