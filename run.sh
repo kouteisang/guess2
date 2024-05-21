@@ -4,7 +4,7 @@
 k_values=(3 4 5 6 7 8 9)  
 m_values=(2 5 9)
 
-# 循环遍历所有k和m的组合
+
 for k in "${k_values[@]}"
 do
     for m in "${m_values[@]}"
