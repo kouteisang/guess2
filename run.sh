@@ -1,5 +1,5 @@
 #!/bin/bash
-
+# Scripts to get the results
 
 k_values=(3 4 5 6 7 8 9)  
 m_values=(2 5 9)
