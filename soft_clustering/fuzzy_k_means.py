@@ -19,9 +19,6 @@ def normalise_U(U):
 
 # This function is for test FCM class
 def de_randomise_data(data, order):
-    """
-    此函数将返回数据的原始顺序，将randomise_data()返回的order列表作为参数
-    """
     new_data = [[] for i in range(0, len(data))]
     for index in range(len(order)):
         new_data[order[index]] = data[index]
@@ -37,9 +34,9 @@ def checker_iris(final_location):
         checker = [0, 0, 0]
         for i in range(0, 50):
             for j in range(0, len(final_location[0])):
-                if final_location[i + (50 * k)][j] == 1:  # i+(50*k)表示 j表示第j类
-                    checker[j] += 1  # checker分别统计每一类分类正确的个数
-        right += max(checker)  # 累加分类正确的个数
+                if final_location[i + (50 * k)][j] == 1:  
+                    checker[j] += 1  
+        right += max(checker)  
     print('The number of data points be clustered in to the right cluster:', right)
     answer = right / 150 * 100
     return "Accuracy rate：" + str(answer) + "%"
@@ -58,11 +55,6 @@ def randomize_data(data):
 
 # This function is for test FCM class
 def import_data_format_iris(file):
-    """
-    file: the file path
-    格式化数据，前四列为data，最后一列为类标号（有0，1，2三类）
-    如果是你自己的data，就不需要执行此段函数了。
-    """
     data = []
     cluster_location = []
     with open(str(file), 'r') as f:
@@ -171,50 +163,3 @@ class FCM:
                 # normalise
                 # self.U = normalise_U(self.U)
                 return self.U
-
-#
-# if __name__ == '__main__':
-#     # import test data
-#     data = import_data_format_iris("iris.txt")
-#     k_means_data = data
-#     # random the data order
-#     data, order = randomize_data(data)
-#     fcm = FCM(data, 3, 9, 0.001)
-#     final_location = de_randomise_data(fcm.forward(), order)
-#     print(checker_iris(final_location))
-#
-#     predict_label = [np.argmax(x) for x in final_location]
-#     true_label = []
-#     for i in range(150):
-#         if i < 50:
-#             true_label.append(0)
-#         elif i >= 50 and i < 100:
-#             true_label.append(1)
-#         elif i >= 100:
-#             true_label.append(2)
-#
-#     print("fuzzy k-means NMI = ", normalized_mutual_info_score(true_label, predict_label))
-#
-#     # use K-means to get the NMI
-#     k_means = KMeans(n_clusters=3, random_state=0).fit(k_means_data)
-#     k_means_pred = k_means.labels_
-#     print("k-means NMI = ", normalized_mutual_info_score(true_label, k_means_pred))
-#
-#
-#     # test
-#     # root = os.path.abspath(os.path.dirname(os.getcwd()))
-#     # lm_path = os.path.join(root, "data_analysis", "lmdb", "lmdb_all.txt")
-#     # tf = TriplesFactory.from_path(lm_path)
-#     #
-#     # model = torch.load("/Users/huangcheng/Documents/ESBasedonSimilarity/embedding/model_lmdb/lmdb_transe_model/trained_model.pkl")
-#     #
-#     # file_path = "/Users/huangcheng/Documents/ESBasedonSimilarity/data_analysis/lmdb/101_desc.nt"
-#     #
-#     # res = get_embedding_representation(tf, model, file_path)
-#     # print(type(res))
-#     # fcm_test = FCM(res, 20, 2, 0.001)
-#     # print(fcm_test.forward())
-#     # t = fcm_test.forward()
-#     # ans = greedy_search(t, 5)
-#
-#     ## Check the dataset and do some experiment
