@@ -1,9 +1,4 @@
-# @Author : Cheng Huang
-# @Time   : 14:46 2024/4/20
-# @File   : compgcn_embedding.py.py
-# @Author : Cheng Huang
-# @Time   : 15:11 2022/9/5
-# @File   : transe_embedding.py
+
 # This file is to get the transE embedding of the lmdb dataset and the dbpedia dataset
 import os
 import time
