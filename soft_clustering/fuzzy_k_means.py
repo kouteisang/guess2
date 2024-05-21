@@ -1,6 +1,4 @@
-# @Author : Cheng Huang
-# @Time   : 15:11 2022/9/12
-# @File   : fuzzy_k_means.py
+
 import copy
 import random
 import numpy as np
