@@ -38,11 +38,11 @@ def get_embedding_CompGCN(path, training, testing, validation):
                 num_epochs=10,
                 batch_size=128,
             ),
-            stopper='early',  # 使用提前停止
+            stopper='early',  
             stopper_kwargs=dict(
-                frequency=5,       # 每5个epoch检查一次性能
-                patience=20,       # 如果20个epoch内没有改善，则停止
-                relative_delta=0.01  # 改善至少需要1%
+                frequency=5,       
+                patience=20,      
+                relative_delta=0.01 
             )
         )
         # dbmodel.save_to_directory('model_complete_dbpedia_CompGCN_default_100/dbpedia_CompGCN_model')
@@ -59,14 +59,14 @@ def get_embedding_CompGCN(path, training, testing, validation):
                 embedding_dim=100,
             ),
             training_kwargs=dict(
-                num_epochs=10,  # 设置较大的epoch，期望通过提前停止来中断
+                num_epochs=10,  
                 batch_size=128,
             ),
-            stopper='early',  # 使用提前停止
+            stopper='early', 
             stopper_kwargs=dict(
-                frequency=5,       # 每5个epoch检查一次性能
-                patience=20,       # 如果20个epoch内没有改善，则停止
-                relative_delta=0.01  # 改善至少需要1%
+                frequency=5,       
+                patience=20,       
+                relative_delta=0.01  
             )
         )
 
@@ -91,19 +91,18 @@ def get_embedding_TransE(path, training, testing, validation, lr, dim, fn, margi
                 scoring_fct_norm = fn,
                 embedding_dim=dim),
             training_kwargs=dict(
-                num_epochs=300,  # 设置较大的epoch，期望通过提前停止来中断
+                num_epochs=300,  
                 batch_size=128,
             ),
             optimizer=Adam,
             optimizer_kwargs=dict(lr=lr),
-            stopper='early',  # 使用提前停止
+            stopper='early',  
             stopper_kwargs=dict(
-                frequency=5,       # 每5个epoch检查一次性能
-                patience=20,       # 如果20个epoch内没有改善，则停止
-                relative_delta=0.01  # 改善至少需要1%
+                frequency=5,      
+                patience=20,       
+                relative_delta=0.01  
             )
         )
-        # dbmodel.save_to_directory('/home/cheng/guess2/embedding/transe_embedding/dbpedia_transe_model_dim_{}_lr_{}_fn_{}_margin_{}'.format(dim, lr, fn, margin))
 
     lmmodel = None
     if "lmdb" in path:
@@ -120,20 +119,19 @@ def get_embedding_TransE(path, training, testing, validation, lr, dim, fn, margi
                 scoring_fct_norm = fn,
                 embedding_dim=dim),
             training_kwargs=dict(
-                num_epochs=10,  # 设置较大的epoch，期望通过提前停止来中断
+                num_epochs=10, 
                 batch_size=128,
             ),
             optimizer=Adam,
             optimizer_kwargs=dict(lr=lr),
-            stopper='early',  # 使用提前停止
+            stopper='early',  
             stopper_kwargs=dict(
-                frequency=5,       # 每5个epoch检查一次性能
-                patience=20,       # 如果20个epoch内没有改善，则停止
-                relative_delta=0.01  # 改善至少需要1%
+                frequency=5,      
+                patience=20,       
+                relative_delta=0.01 
             )
         )
 
-        # lmmodel.save_to_directory('/home/cheng/guess2/embedding/transe_embedding/lmdb_transe_model_dim_{}_lr_{}_fn_{}_margin_{}'.format(dim, lr, fn, margin))
 
 
 
@@ -158,14 +156,13 @@ def get_embedding_distmult(path, training, testing, validation, lr, dim, margin)
             ),
             optimizer=Adam,
             optimizer_kwargs=dict(lr=lr),
-            stopper='early',  # 使用提前停止
+            stopper='early',  
             stopper_kwargs=dict(
-                frequency=5,       # 每5个epoch检查一次性能
-                patience=20,       # 如果20个epoch内没有改善，则停止
-                relative_delta=0.01  # 改善至少需要1%
+                frequency=5,       
+                patience=20,      
+                relative_delta=0.01 
             )
         )
-        # dbmodel.save_to_directory('/home/cheng/guess2/embedding/distmult_embedding/dbpedia_distmult_model_dim_{}_lr_{}_margin_{}'.format(dim, lr, margin))
 
     lmmodel = None
     if "lmdb" in path:
@@ -179,20 +176,19 @@ def get_embedding_distmult(path, training, testing, validation, lr, dim, margin)
             model_kwargs = dict(
                 embedding_dim=dim),
             training_kwargs=dict(
-                num_epochs=10,  # 设置较大的epoch，期望通过提前停止来中断
+                num_epochs=10,  
                 batch_size=128,
             ),
             optimizer=Adam,
             optimizer_kwargs=dict(lr=lr),
-            stopper='early',  # 使用提前停止
+            stopper='early',  
             stopper_kwargs=dict(
-                frequency=5,       # 每5个epoch检查一次性能
-                patience=20,       # 如果20个epoch内没有改善，则停止
-                relative_delta=0.01  # 改善至少需要1%
+                frequency=5,       
+                patience=20,      
+                relative_delta=0.01  
             )
         )
 
-        # lmmodel.save_to_directory('/home/cheng/guess2/embedding/distmult_embedding/lmdb_distmult_model_dim_{}_lr_{}_margin_{}'.format(dim, lr, margin))
 
 # This method is to evaluate the model
 # using MRR and hits@10
@@ -201,17 +197,10 @@ def evluate_model(path, training, testing, validation, lr, dim, fn, margin):
     model = None
 
     if "dbpedia" in path:
-        # TransE
-        # model = torch.load("/home/cheng/guess2/embedding/transe_embedding/dbpedia_transe_model_dim_{}_lr_{}_fn_{}_margin_{}/trained_model.pkl".format(dim, lr, fn, margin)); 
-        # DistMult
-        model = torch.load("/home/cheng/guess2/embedding/distmult_embedding/dbpedia_distmult_model_dim_{}_lr_{}_margin_{}/trained_model.pkl".format(dim, lr, margin));
-        # model = torch.load(os.path.join(os.getcwd(),"model_complete_dbpedia_CompGCN_default_100/dbpedia_CompGCN_model/trained_model.pkl"))
+        model = torch.load(path)
     else:
-        # TransE
-        # model = torch.load("/home/cheng/guess2/embedding/transe_embedding/lmdb_transe_model_dim_{}_lr_{}_fn_{}_margin_{}/trained_model.pkl".format(dim, lr, fn, margin)); 
-        # DistMult
-        model = torch.load("/home/cheng/guess2/embedding/distmult_embedding/lmdb_distmult_model_dim_{}_lr_{}_margin_{}/trained_model.pkl".format(dim, lr, margin));
-        # model = torch.load(os.path.join(os.getcwd(),"model_compgcn_default_complete_lmdb_50/lmdb_CompGCN_model/trained_model.pkl"))
+        model = torch.load(path)
+     
     result = evaluator.evaluate(
         model=model,
         mapped_triples=testing.mapped_triples,
@@ -242,25 +231,6 @@ def choose(path):
     margins = [1, 2, 10]
 
 
-    # for lr in lrs:
-    #     for dim in dims:
-    #         for margin in margins:
-    # lr = 0.001
-    # dim = 100
-    # margin = 1
-    # result = evluate_model(path, training, testing, validation, lr, dim, margin) 
-    # print("ls = {}, dim = {}, margin = {}".format(lr, dim, margin), result) 
-                  # for lr in lrs:
-
-    ## Evaluate TransE model
-    # for lr in lrs:
-    #     for dim in dims:
-    #         for fn in fns:
-    #             for margin in margins:
-    #                 result = evluate_model(path, training, testing, validation, lr, dim, fn, margin)
-    #                 print("ls = {}, dim = {}, fn = {}, margin = {}". format(lr, dim, fn, margin), result)
-
-    ## Evaluate DistMult model
     lr = 0.01    
     for lr in lrs:
         for dim in dims:
@@ -271,8 +241,8 @@ def choose(path):
 
 if __name__ == '__main__':
     root = os.path.abspath(os.path.dirname(os.getcwd()))
-    db_path = "/home/cheng/entity_summarization/complete_data/dbpedia/complete_extract_dbpedia.tsv"
-    lm_path = "/home/cheng/entity_summarization/complete_data/lmdb/complete_extract_lmdb.tsv"
+    db_path = "/entity_summarization/complete_data/dbpedia/complete_extract_dbpedia.tsv"
+    lm_path = "/entity_summarization/complete_data/lmdb/complete_extract_lmdb.tsv"
     # choose(db_path)
     choose(lm_path)
 
